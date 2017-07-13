@@ -1,0 +1,29 @@
+version: "3"
+services:
+  client:
+    build: .
+    command: node hello-client
+  server:
+    build: .
+    command: node hello-server Bob
+    restart: always
+  express-proxy:
+    build: .
+    command: node --inspect=0.0.0.0:35503 express-proxy
+    environment:
+      - VIRTUAL_HOST=fs2017.io, ws://fs2017.io
+      - BALANCE=source
+    ports:
+      - 35503:35503
+    expose:
+      - 5000
+  lb:
+    image: dockercloud/haproxy
+    links:
+      - express-proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 80:80
+      - 443:443
+    restart: on-failure

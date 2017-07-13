@@ -1,0 +1,14 @@
+{
+  "name": "fs2017-microservices",
+  "author": {
+    "name": "Armagan Amcalar",
+    "email": "armagan@amcalar.com"
+  },
+  "version": "0.0.1",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "cote": "^0.15.1",
+    "express": "^4.15.3"
+  }
+}
